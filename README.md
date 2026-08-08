@@ -61,19 +61,19 @@ Each template can be recolored using a single **Template Color** setting while p
 
 The uploaded Excel file should contain participant information in the first columns.
 
-| Column | Content | Required |
-|---|---|---|
-| 1 | Full Name | Yes |
-| 2 | Paper Title | Yes |
-| 3 | Optional footer text | No |
+| Column | Content                | Required |
+|--------|------------------------|----------|
+| 1      | Full Name              | Yes      |
+| 2      | Paper Title            | Yes      |
+| 3      | Footer Text (Optional) | No       |
 
 Example:
 
-| Full Name | Paper Title | Footer |
-|---|---|---|
-| Cameron Tucker | Machine Learning-Based Prediction of Academic Performance Using Multidimensional Learning Indicators | ID-882026 |
-| Michael Scott  | Explainable Artificial Intelligence for Automated Assessment of Psychological Constructs | ID-882027 |
-| Ron Swanson    | Evaluating Measurement Invariance in AI-Assisted Psychometric Assessment Systems | ID-882027 |
+| Full Name      | Paper Title                                                                                          | Footer |
+|----------------|------------------------------------------------------------------------------------------------------|--------|
+| Cameron Tucker | Machine Learning-Based Prediction of Academic Performance Using Multidimensional Learning Indicators | MF2009 |
+| Michael Scott  | Explainable Artificial Intelligence for Automated Assessment of Psychological Constructs             | TO2005 |
+| Ron Swanson    | Evaluating Measurement Invariance in AI-Assisted Psychometric Assessment Systems                     | PR2009 |
 
 The third column is optional. If it contains text, that text is displayed as a small gray footer in the generated PDF.
 
