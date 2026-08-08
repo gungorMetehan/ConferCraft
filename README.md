@@ -71,8 +71,9 @@ Example:
 
 | Full Name | Paper Title | Footer |
 |---|---|---|
-| Gökçe Yılmaz | Validity Evidence in Psychological Measurement | ID-21212 |
-| Deniz Kaya | Contemporary Approaches in Educational Research | |
+| Cameron Tucker | Machine Learning-Based Prediction of Academic Performance Using Multidimensional Learning Indicators | ID-882026 |
+| Michael Scott  | Explainable Artificial Intelligence for Automated Assessment of Psychological Constructs | ID-882027 |
+| Ron Swanson    | Evaluating Measurement Invariance in AI-Assisted Psychometric Assessment Systems | ID-882027 |
 
 The third column is optional. If it contains text, that text is displayed as a small gray footer in the generated PDF.
 
