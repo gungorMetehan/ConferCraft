@@ -57,6 +57,45 @@ The application currently includes eight templates:
 
 Each template can be recolored using a single **Template Color** setting while preserving the template's light and dark visual hierarchy.
 
+<table>
+  <tr>
+    <td align="center">
+      <img src="apps/acceptance-letter-generator/templates/linear_horizon.svg" width="180"><br>
+      <b>Linear Horizon</b>
+    </td>
+    <td align="center">
+      <img src="apps/acceptance-letter-generator/templates/contour_flow.svg" width="180"><br>
+      <b>Contour Flow</b>
+    </td>
+    <td align="center">
+      <img src="apps/acceptance-letter-generator/templates/diamond_edge.svg" width="180"><br>
+      <b>Diamond Edge</b>
+    </td>
+    <td align="center">
+      <img src="apps/acceptance-letter-generator/templates/watercolor_bloom.svg" width="180"><br>
+      <b>Watercolor Bloom</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="apps/acceptance-letter-generator/templates/canvas_wash.svg" width="180"><br>
+      <b>Canvas Wash</b>
+    </td>
+    <td align="center">
+      <img src="apps/acceptance-letter-generator/templates/silken_waves.svg" width="180"><br>
+      <b>Silken Waves</b>
+    </td>
+    <td align="center">
+      <img src="apps/acceptance-letter-generator/templates/prism_dots.svg" width="180"><br>
+      <b>Prism Dots</b>
+    </td>
+    <td align="center">
+      <img src="apps/acceptance-letter-generator/templates/origami_fold.svg" width="180"><br>
+      <b>Origami Fold</b>
+    </td>
+  </tr>
+</table>
+
 ## Excel File Format
 
 The uploaded Excel file should contain participant information in the first columns.
