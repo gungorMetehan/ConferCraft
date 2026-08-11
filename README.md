@@ -46,17 +46,6 @@ Upload an Excel file containing participant information, customize the letter de
 
 The application currently includes eight templates:
 
-1. **Linear Horizon**
-2. **Contour Flow**
-3. **Diamond Edge**
-4. **Watercolor Bloom**
-5. **Canvas Wash**
-6. **Silken Waves**
-7. **Prism Dots**
-8. **Origami Fold**
-
-Each template can be recolored using a single **Template Color** setting while preserving the template's light and dark visual hierarchy.
-
 <table>
   <tr>
     <td align="center">
@@ -95,6 +84,8 @@ Each template can be recolored using a single **Template Color** setting while p
     </td>
   </tr>
 </table>
+
+Each template can be recolored using a single **Template Color** setting while preserving the template's light and dark visual hierarchy.
 
 ## Excel File Format
 
