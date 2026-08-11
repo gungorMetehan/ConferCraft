@@ -283,7 +283,7 @@ Current and planned tools include:
 
 This project is licensed under the **MIT License**.
 
-See the `LICENSE` file for details.
+See the [`LICENSE`](https://github.com/gungorMetehan/ConferCraft/blob/main/LICENSE) file for details.
 
 ## Author
 
