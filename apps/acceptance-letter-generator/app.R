@@ -1,9 +1,6 @@
 # ============================================================
 # CONFERCRAFT - ACCEPTANCE LETTER GENERATOR
 # Creator: Metehan Güngör
-# Rich text: Markdown in the letter title, plus Markdown, bullets, and LaTeX-style mathematics in body/signatures
-# Templates: eight named SVG backgrounds from the templates folder with one customizable template color
-# PDF fonts: open-licensed Google Fonts loaded on demand with sysfonts/showtext
 # ============================================================
 
 library(shiny)
