@@ -281,11 +281,11 @@ The uploaded Excel file should contain participant information in the first two 
 
 Example:
 
-| Full Name      | Title                       |
-|----------------|-----------------------------|
-| Cameron Tucker | Invited Speaker             |
-| Michael Scott  | Scientific Committee Member |
-| Ron Swanson    | Session Chair               |
+| Full Name          | Title                                  |
+|--------------------|----------------------------------------|
+| Mitchell Pritchett | Machine Learning in Education          |
+| Dwight Schrute     | Introduction to R Programming Language |
+| Ben Wyatt          | Item Response Theory                   |
 
 The second column is optional. It is only required when the certificate content uses the `{title}` placeholder.
 
