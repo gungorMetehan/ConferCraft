@@ -323,6 +323,13 @@ ui <- fluidPage(
           fill: currentColor;
         }
 
+        .theme-toggle {
+          padding: 0;
+          cursor: pointer;
+          appearance: none;
+          -webkit-appearance: none;
+        }
+
         .theme-icon-sun { display: none !important; }
 
         .hero {
@@ -878,9 +885,11 @@ ui <- fluidPage(
           function syncThemeButton() {
             var button = document.getElementById('theme_toggle');
             if (!button) return;
-            var label = isDark() ? 'Switch to light mode' : 'Switch to dark mode';
+            var dark = isDark();
+            var label = dark ? 'Switch to light mode' : 'Switch to dark mode';
             button.setAttribute('title', label);
             button.setAttribute('aria-label', label);
+            button.setAttribute('aria-pressed', dark ? 'true' : 'false');
           }
 
           document.addEventListener('DOMContentLoaded', syncThemeButton);
@@ -947,14 +956,15 @@ ui <- fluidPage(
         ),
         tags$button(
           id = "theme_toggle",
-          class = "nav-icon-button",
+          class = "nav-icon-button theme-toggle",
           type = "button",
           title = "Switch to dark mode",
           `aria-label` = "Switch to dark mode",
+          `aria-pressed` = "false",
           HTML(
             paste0(
               "<svg class='theme-icon-moon' viewBox='0 0 24 24' aria-hidden='true'><path d='M20.15 15.42A8.1 8.1 0 0 1 8.58 3.85 8.65 8.65 0 1 0 20.15 15.42Zm-8.2 5.03A6.95 6.95 0 0 1 6.44 9.27a6.9 6.9 0 0 1 .47-3.34 9.25 9.25 0 0 0 10.66 10.66 6.91 6.91 0 0 1-5.62 3.86Z'/></svg>",
-              "<svg class='theme-icon-sun' viewBox='0 0 24 24' aria-hidden='true'><path d='M12 7.25A4.75 4.75 0 1 0 12 16.75 4.75 4.75 0 0 0 12 7.25Zm0 8A3.25 3.25 0 1 1 12 8.75a3.25 3.25 0 0 1 0 6.5ZM12 1.5a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-1.5 0v-2A.75.75 0 0 1 12 1.5Zm0 17.5a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-1.5 0v-2A.75.75 0 0 1 12 19Z'/></svg>"
+              "<svg class='theme-icon-sun' viewBox='0 0 24 24' aria-hidden='true' focusable='false'><path d='M12 7.25A4.75 4.75 0 1 0 12 16.75 4.75 4.75 0 0 0 12 7.25Zm0 8A3.25 3.25 0 1 1 12 8.75a3.25 3.25 0 0 1 0 6.5ZM12 1.5a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-1.5 0v-2A.75.75 0 0 1 12 1.5Zm0 17.5a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-1.5 0v-2A.75.75 0 0 1 12 19ZM4.58 3.52a.75.75 0 0 1 1.06 0l1.42 1.42A.75.75 0 1 1 6 6L4.58 4.58a.75.75 0 0 1 0-1.06Zm12.36 12.36a.75.75 0 0 1 1.06 0l1.42 1.42a.75.75 0 1 1-1.06 1.06l-1.42-1.42a.75.75 0 0 1 0-1.06ZM1.5 12a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 1.5 12Zm17.5 0a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 19 12ZM4.58 20.48a.75.75 0 0 1 0-1.06L6 18a.75.75 0 1 1 1.06 1.06l-1.42 1.42a.75.75 0 0 1-1.06 0Zm12.36-12.36a.75.75 0 0 1 0-1.06l1.42-1.42a.75.75 0 1 1 1.06 1.06L18 8.12a.75.75 0 0 1-1.06 0Z'/></svg>"
             )
           )
         )
