@@ -1,36 +1,6 @@
 # ============================================================
 # CONFERCRAFT - CERTIFICATE GENERATOR
 # Creator: Metehan Gungor
-#
-# Expected folder structure:
-# apps/
-#   certificate-generator/
-#     app.R
-#     templates/
-#       whisper_current.svg
-#       classic_flourish.svg
-#       baroque_scroll.svg
-#       deco_grid.svg
-#       hellenic_key.svg
-#       laureate_crest.svg
-#       fine_line.svg
-#       botanical_filigree.svg
-#
-# Excel structure:
-#   Column 1: Full Name (required)
-#   Column 2: Title (optional)
-#
-# Placeholders:
-#   {name}  -> first Excel column
-#   {title} -> second Excel column, when present
-#
-# Layout:
-#   Logos: up to two, independently positioned in six top/bottom slots
-#   Signatures: up to two, independently positioned in three bottom slots
-#
-# Optional navigation:
-# Set CONFERCRAFT_ACCEPTANCE_URL in the deployment environment to the
-# deployed Acceptance Letter Generator URL.
 # ============================================================
 
 library(shiny)
@@ -1821,6 +1791,13 @@ ui <- fluidPage(
       html.confercraft-dark .preview-placeholder { background: #11191d; border-color: #35564f; }
       html.confercraft-dark .pdf-frame { background: #1a2226; border-color: #34413e; }
 
+      .theme-toggle {
+        padding: 0;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+
       .theme-icon-sun { display: none !important; }
       html.confercraft-dark .theme-icon-moon { display: none !important; }
       html.confercraft-dark .theme-icon-sun { display: block !important; }
@@ -1837,25 +1814,42 @@ ui <- fluidPage(
     tags$script(HTML(
       "
       (function() {
-        function isDark() {
+        var storageKey = 'confercraft-theme';
+
+        function darkModeIsOn() {
           return document.documentElement.classList.contains('confercraft-dark');
         }
-        function syncButton() {
+
+        function syncThemeButton() {
           var button = document.getElementById('theme_toggle');
           if (!button) return;
-          var label = isDark() ? 'Switch to light mode' : 'Switch to dark mode';
+
+          var dark = darkModeIsOn();
+          var label = dark ? 'Switch to light mode' : 'Switch to dark mode';
           button.setAttribute('title', label);
           button.setAttribute('aria-label', label);
+          button.setAttribute('aria-pressed', dark ? 'true' : 'false');
         }
-        document.addEventListener('DOMContentLoaded', syncButton);
+
+        function setTheme(dark) {
+          document.documentElement.classList.toggle('confercraft-dark', dark);
+
+          try {
+            localStorage.setItem(storageKey, dark ? 'dark' : 'light');
+          } catch (error) {}
+
+          syncThemeButton();
+        }
+
+        document.addEventListener('DOMContentLoaded', syncThemeButton);
+
         document.addEventListener('click', function(event) {
-          var button = event.target.closest ? event.target.closest('#theme_toggle') : null;
+          var target = event.target;
+          var button = target && target.closest ? target.closest('#theme_toggle') : null;
           if (!button) return;
+
           event.preventDefault();
-          var nextDark = !isDark();
-          document.documentElement.classList.toggle('confercraft-dark', nextDark);
-          try { localStorage.setItem('confercraft-theme', nextDark ? 'dark' : 'light'); } catch (error) {}
-          syncButton();
+          setTheme(!darkModeIsOn());
         });
       })();
       "
@@ -1932,13 +1926,17 @@ ui <- fluidPage(
           class = "topbar-actions",
           tags$button(
           id = "theme_toggle",
-          class = "topbar-icon-link",
+          class = "topbar-icon-link theme-toggle",
           type = "button",
           title = "Switch to dark mode",
-          HTML(paste0(
-            '<svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.15 15.42A8.1 8.1 0 0 1 8.58 3.85 8.65 8.65 0 1 0 20.15 15.42Zm-8.2 5.03A6.95 6.95 0 0 1 6.44 9.27a6.9 6.9 0 0 1 .47-3.34 9.25 9.25 0 0 0 10.66 10.66 6.91 6.91 0 0 1-5.62 3.86Z"/></svg>',
-            '<svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.25A4.75 4.75 0 1 0 12 16.75 4.75 4.75 0 0 0 12 7.25Zm0 8A3.25 3.25 0 1 1 12 8.75a3.25 3.25 0 0 1 0 6.5ZM12 1.5a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-1.5 0v-2A.75.75 0 0 1 12 1.5Zm0 17.5a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-1.5 0v-2A.75.75 0 0 1 12 19Z"/></svg>'
-          ))
+          `aria-label` = "Switch to dark mode",
+          `aria-pressed` = "false",
+          HTML(
+            paste0(
+              '<svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.15 15.42A8.1 8.1 0 0 1 8.58 3.85 8.65 8.65 0 1 0 20.15 15.42Zm-8.2 5.03A6.95 6.95 0 0 1 6.44 9.27a6.9 6.9 0 0 1 .47-3.34 9.25 9.25 0 0 0 10.66 10.66 6.91 6.91 0 0 1-5.62 3.86Z"/></svg>',
+              '<svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 7.25A4.75 4.75 0 1 0 12 16.75 4.75 4.75 0 0 0 12 7.25Zm0 8A3.25 3.25 0 1 1 12 8.75a3.25 3.25 0 0 1 0 6.5ZM12 1.5a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-1.5 0v-2A.75.75 0 0 1 12 1.5Zm0 17.5a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-1.5 0v-2A.75.75 0 0 1 12 19ZM4.58 3.52a.75.75 0 0 1 1.06 0l1.42 1.42A.75.75 0 1 1 6 6L4.58 4.58a.75.75 0 0 1 0-1.06Zm12.36 12.36a.75.75 0 0 1 1.06 0l1.42 1.42a.75.75 0 1 1-1.06 1.06l-1.42-1.42a.75.75 0 0 1 0-1.06ZM1.5 12a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 1.5 12Zm17.5 0a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 19 12ZM4.58 20.48a.75.75 0 0 1 0-1.06L6 18a.75.75 0 1 1 1.06 1.06l-1.42 1.42a.75.75 0 0 1-1.06 0Zm12.36-12.36a.75.75 0 0 1 0-1.06l1.42-1.42a.75.75 0 1 1 1.06 1.06L18 8.12a.75.75 0 0 1-1.06 0Z"/></svg>'
+            )
+          )
         ),
         tags$a(
           class = "topbar-icon-link",
@@ -1946,6 +1944,7 @@ ui <- fluidPage(
           target = "_blank",
           rel = "noopener noreferrer",
           title = "ConferCraft on GitHub",
+          `aria-label` = "Open ConferCraft GitHub repository",
           HTML('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .7C5.65.7.5 5.85.5 12.2c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.28-.01-1.2-.02-2.18-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18A11.1 11.1 0 0 1 12 6.2c.98 0 1.96.13 2.88.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.67.79.56 4.56-1.52 7.85-5.83 7.85-10.9C23.5 5.85 18.35.7 12 .7Z"/></svg>')
         )
         )
